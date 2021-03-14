@@ -74,15 +74,21 @@ void GozihrWindow::Draw() {
   std::istringstream f(disasm);
   std::string s;
   while (std::getline(f, s, '\n')){
-    const char* currthing = s.c_str();
-    int currlen = strlen(currthing);
-    char * innerstr;
-    strncpy(innerstr, currthing, currlen+1);    
-    splitstring q(innerstr);
-    std::vector<std::string> headers = q.split('|',0);
-    for (int k = 0; k < headers.size(); k++){
-      ImGui::Text("%s", headers[k]);
+    std::istringstream g(s);
+    std::string p;
+    while (std::getline(g, p, '|')){
+      if (!p.empty()){ImGui::Text("%s",p);}
     }
+    //const char* currthing = s.c_str();
+    //int currlen = strlen(currthing);
+    //char* innerstr;
+    //innerstr = new char[currlen + 1]();
+    //strncpy(innerstr, currthing, currlen+1);    
+    //splitstring q(innerstr);
+    //std::vector<std::string> headers = q.split('|',0);
+    //for (int k = 0; k < headers.size(); k++){
+    //  ImGui::Text("%s", headers[k]);
+    //}
     strs.push_back(s);
   }
   //ImGui::Text("..\n");
