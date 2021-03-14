@@ -8,6 +8,7 @@
 #define __IMGUI_GL_WINDOW_H__
 
 #include "glfwWindow.h"
+#include "splitstring.h"
 
 class GozihrWindow {
 public:
@@ -28,6 +29,9 @@ public:
   ImguiGLWindow(std::string title, int width = 640, int height = 480);
   virtual void init() final;
   virtual void draw() final;
+};
+
+class DrawUtilities {
 };
 
 #endif // __IMGUI_GL_WINDOW_H__

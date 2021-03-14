@@ -86,12 +86,14 @@ set (SourceFiles
     glfwWindow.cpp
     imguiGLWindow.cpp
     window.cpp
+    splitstring.cpp
 )
 
 set(HeaderFiles
     glfwWindow.h
     imguiGLWindow.h
     window.h
+    splitstring.h
 )
 
 include_directories(${CMAKE_SOURCE_DIR}/packages/ ${DISASSEMBLER_SOURCE_DIR})
