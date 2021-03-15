@@ -58,27 +58,66 @@ void GozihrWindow::Draw() {
   }
   // Display contents in a scrolling region
   ImGui::BeginChild("Scrolling");
-  //const char* dstring = disasm.c_str();
-  //int dlen = strlen(dstring);
-  //char * teststr;
-  //std::string dlim = "\n";
-  //teststr = new char[dlen + 1]();
-  //strncpy(teststr, dstring, dlen + 1);
-  //char * splitres = strtok(teststr, dlim.c_str());
-  //while (splitres != NULL){
-  //  ImGui::Text("%s", splitres);
-  //  splitres = strtok(NULL, dlim.c_str());
-  //}
-  //ImGui::Text("..\n");
-  std::vector<std::string> strs;
-  std::istringstream f(disasm);
-  std::string s;
-  while (std::getline(f, s, '\n')){
-    std::istringstream g(s);
-    std::string p;
-    while (std::getline(g, p, '|')){
-      if (!p.empty()){ImGui::Text("%s",p);}
+  ImGui::Text("Working Area");
+  
+  /* C++ substrings */
+  /*
+  std::string workingcopy = disasm;
+  std::string d1 = "\n";
+  std::string d2 = "|";
+  size_t pos1 = 0;
+  size_t pos2 = 0;
+
+  std::string tok1;
+  std::string tok2;
+  bool found2=false;
+  
+  while ((pos1 = workingcopy.find(d1)) != std::string::npos) {
+    tok1 = workingcopy.substr(0, pos1);
+    std::string backup = tok1;
+    while ((pos2 = tok1.find(d2))!= std::string::npos){
+      found2 = true;
+      tok2 = tok1.substr(0, pos2);
+      ImGui::Text("%s", tok2);
+      tok1.erase(0, pos2 + d2.length());    
     }
+    if (found2) {
+      ImGui::Text("%s", tok2);
+    }
+    // add last thing to figure
+    workingcopy.erase(0, pos1 + d1.length());
+  }
+  */ 
+
+
+  /* as a cstring */
+  
+  const char* dstring = disasm.c_str();
+  int dlen = strlen(dstring);
+  char * teststr;
+  std::string dlim = "\n";
+  teststr = new char[dlen + 1]();
+  strncpy(teststr, dstring, dlen + 1);
+  char * splitres = strtok(teststr, dlim.c_str());
+  while (splitres != NULL){
+    ImGui::Text("%s", splitres);
+    splitres = strtok(NULL, dlim.c_str());
+  }
+  
+  
+  ImGui::EndChild();
+  //ImGui::Text("..\n");
+  /* Attempt at using getline */
+  //std::vector<std::string> strs;
+  //std::istringstream f(disasm);
+  //std::string s;
+  //while (std::getline(f, s, '\n')){
+  //std::istringstream g(s);
+  //std::string p;
+  //while (std::getline(g, p, '|')){
+  //  if (!p.empty()){ImGui::Text("%s",p);}
+  //}
+  /* Basic tests and text formatting */
     //const char* currthing = s.c_str();
     //int currlen = strlen(currthing);
     //char* innerstr;
@@ -89,13 +128,13 @@ void GozihrWindow::Draw() {
     //for (int k = 0; k < headers.size(); k++){
     //  ImGui::Text("%s", headers[k]);
     //}
-    strs.push_back(s);
-  }
+    //strs.push_back(s);
+  //}
   //ImGui::Text("..\n");
   //ImGui::Text("%d", strlen(disasm.c_str()));
   //ImGui::Text("%d", disasm.length());
   //ImGui::Text("%s", disasm.c_str());
-  ImGui::EndChild();
+  
   ImGui::End();
 }
 
