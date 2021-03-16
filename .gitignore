@@ -5,3 +5,4 @@ packages
 *.out
 *.obj
 *.exe
+*.ini
