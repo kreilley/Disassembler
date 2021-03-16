@@ -6,3 +6,4 @@ packages
 *.obj
 *.exe
 *.ini
+*.vscode
