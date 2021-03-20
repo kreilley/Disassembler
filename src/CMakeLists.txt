@@ -90,6 +90,7 @@ add_library(${PROJECT_NAME} STATIC ${SourceFiles} ${HeaderFiles}
             $<TARGET_OBJECTS:Disassembler.Diff>
             $<TARGET_OBJECTS:Disassembler.Repl>
             $<TARGET_OBJECTS:Disassembler.Runtime>
+            $<TARGET_OBJECTS:Disassembler.Version>
 )
 
 target_link_libraries(${PROJECT_NAME} ${TargetLibraries})
@@ -114,16 +115,13 @@ target_include_directories(${PROJECT_NAME}
 
 add_subdirectory (cli)
 add_subdirectory(dataPattern)
-## TODO fix: https://github.com/Gozihr/Disassembler/issues/55
-# Then we can remove unix check.
-if(UNIX)
-    add_subdirectory (gui)
-endif()
+add_subdirectory (gui)
 add_subdirectory (diff)
 add_subdirectory (runtime)
 add_subdirectory(pluginInfra)
 add_subdirectory(repl)
 add_subdirectory (test)
+add_subdirectory (version)
 
 
 
