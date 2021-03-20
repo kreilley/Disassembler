@@ -164,7 +164,7 @@ void GozihrWindow::Draw() {
                     char label[strlen(headers[i]+1)];
                     sprintf(label, "%s", headers[i]);
                     ImGui::Selectable(label, &selected[i]);
-                    ImGui::TableNextColumn(); // FIXME-TABLE: Selection overlap
+                    ImGui::TableNextColumn(); 
                 }
                 ImGui::EndTable();
     }
