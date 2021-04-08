@@ -1,5 +1,6 @@
 build
 packages
+tags
 .DS_Store
 *.o
 *.out
