@@ -57,32 +57,13 @@ void GozihrWindow::Draw() {
     Disassemble(filePath);
   }
   // Display contents in a scrolling region
-  if (ImGui::BeginChild("Test Region"))
-  {
-    size_t q = 1;
-    const char* dstring = disasm.c_str();
-    size_t dlen = disasm.length();
-    std::string dlim = "\n";
-    if (ImGui::TreeNode("All Disasm Data")){
-      if (ImGui::BeginChild("Scrolling")){
-      
-      ImGui::Text("Working Area 1");
-      ImGui::Separator();
-    char * teststr;
-    teststr = new char[dlen + 1]();
-    strncpy(teststr, dstring, dlen + 1);
-    char * splitres = strtok(teststr, dlim.c_str());
-    while (splitres != NULL){
-      ImGui::Text("%s", splitres);
-      splitres = strtok(NULL, dlim.c_str());
-      q++; // get max size of value vec
-    }
-    if(q>5){
-    ImGui::Text("Read Output");}
-    ImGui::Separator();
-    ImGui::EndChild();
-    ImGui::TreePop();
-    }
+  ImGui::BeginChild("Scrolling");
+  if (pDisasm != nullptr) {
+    auto instructions = pDisasm->getInstructions();
+    for (size_t i = 0; i < instructions.size(); i++) {
+      std::stringstream stream;
+      stream << instructions[i];
+      ImGui::Text("%s", stream.str().c_str());
     }
   }
   ImGui::EndChild();
@@ -94,9 +75,8 @@ void GozihrWindow::Disassemble(std::string binaryPath, std::string pluginPath) {
     // TODO ImGui::OpenPopup
     return;
   }
-  std::stringstream stream;
-  BinaryDisassemble::action(binaryPath, pluginPath, stream);
-  disasm = stream.str();
+
+  pDisasm = BinaryDisassemble::disassemble(binaryPath, pluginPath);
 }
 
 ImguiGLWindow::ImguiGLWindow(std::string title, int width, int height)
